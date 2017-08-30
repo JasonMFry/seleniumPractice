@@ -9,25 +9,8 @@ driver.manage().window().maximize();
 // delete all cookies
 driver.manage().deleteAllCookies();
 // navigate
-driver.get('http://app-qa.feathr.co/').then(() => {
-    return driver.findElement(webdriver.By.name('username'));
-}).then((username) => {
-    username.sendKeys('REDACTED');
-}).then(() => {
-    return driver.findElement(webdriver.By.name('password'));
-}).then((password) => {
-    password.sendKeys('REDACTED');
-}).then(() => {
-    return driver.findElement(webdriver.By.css(".btn.btn-info"));
-}).then((button) => {
-    return button.click();
-}).then(() => {
-    driver.sleep(1000);
-    return driver.findElement(webdriver.By.css(".username"));
-}).then((username) => {
-    console.log(username);
-}).then(() => {
-    driver.sleep(2000);
+driver.get('https://en.wikipedia.org/wiki/Main_Page');
+driver.findElements(webdriver.By.css('[href^="/wiki/"]')).then((links) => {
+    console.log('Found', links.length, 'wiki links');
     driver.quit();
 });
-
