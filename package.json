@@ -1,0 +1,24 @@
+{
+  "name": "selenium-practice",
+  "version": "1.0.0",
+  "description": "Learning and practicing with Selenium",
+  "main": "server.js",
+  "dependencies": {
+    "selenium-webdriver": "^3.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JasonMFry/seleniumPractice.git"
+  },
+  "author": "jasonmfry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JasonMFry/seleniumPractice/issues"
+  },
+  "homepage": "https://github.com/JasonMFry/seleniumPractice#readme"
+}
