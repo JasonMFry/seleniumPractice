@@ -1,7 +1,6 @@
 const webdriver = require('selenium-webdriver');
 const By = webdriver.By;
 const until = webdriver.until;
-const Promise = require('promise');
 
 // open Firefox
 const driver = new webdriver.Builder().forBrowser('firefox').build();
@@ -10,25 +9,25 @@ driver.manage().window().maximize();
 // delete all cookies
 driver.manage().deleteAllCookies();
 // navigate
-driver.get('https://www.google.com/ncr').then(() => {
-    console.log('Find Google query input');
-    return driver.findElement(webdriver.By.name('q'));
-}).then((q) => {
-    console.log('Search for webdriver');
-    q.sendKeys('webdriver');
+driver.get('http://app-qa.feathr.co/').then(() => {
+    return driver.findElement(webdriver.By.name('username'));
+}).then((username) => {
+    username.sendKeys('REDACTED');
 }).then(() => {
-    console.log('Find search button');
-    return driver.findElement(webdriver.By.name('btnK'));
-}).then((btnK) => {
-    console.log('Click search button');
-    return btnK.click();
+    return driver.findElement(webdriver.By.name('password'));
+}).then((password) => {
+    password.sendKeys('REDACTED');
 }).then(() => {
-    console.log('Get title method');
+    return driver.findElement(webdriver.By.css(".btn.btn-info"));
+}).then((button) => {
+    return button.click();
+}).then(() => {
     driver.sleep(1000);
-    return driver.getTitle();
-}).then((title) => {
-    console.log(title);
+    return driver.findElement(webdriver.By.css(".username"));
+}).then((username) => {
+    console.log(username);
 }).then(() => {
     driver.sleep(2000);
     driver.quit();
 });
+
