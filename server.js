@@ -8,9 +8,39 @@ const driver = new webdriver.Builder().forBrowser('firefox').build();
 driver.manage().window().maximize();
 // delete all cookies
 driver.manage().deleteAllCookies();
-// navigate
-driver.get('https://en.wikipedia.org/wiki/Main_Page');
-driver.findElements(webdriver.By.css('[href^="/wiki/"]')).then((links) => {
-    console.log('Found', links.length, 'wiki links');
+// helper functions
+function findLink(link) {
+    return driver.findElements(webdriver.By.css(`[href="${link}"]`))
+        .then((results) => {
+            return results[0];
+        });
+}
+
+function clickLink(link) {
+    link.click();
+}
+
+function logTitle() {
+    driver.sleep(1000);
+    driver.getTitle().then((title) => {
+        console.log(`Current page title is ${title}`)
+    });
+}
+
+function closeBrowser() {
     driver.quit();
-});
+}
+
+function handleFailure(err) {
+    console.log(`Something went wrong: ${err.stack}`);
+    closeBrowser();
+}
+
+// navigate
+driver.get('https://www.google.com/');
+driver.findElement(webdriver.By.name('q')).sendKeys('iolearn Video Tutorials');
+driver.findElement(webdriver.By.name('btnK')).click();
+driver.wait(findLink("https://iolearn.com/"), 2000)
+    .then(clickLink)
+    .then(logTitle)
+    .then(closeBrowser, handleFailure);
